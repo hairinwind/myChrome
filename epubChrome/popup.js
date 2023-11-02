@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 async function process() {
     displayMsg();
     const url = await getActiveTabUrl();
-    // console.log("Active Tab URL: " + url);
+    console.log("Active Tab URL: " + url);
 
     const content = await fetchHtml(url);
     // console.log("content", content);
@@ -47,7 +47,8 @@ async function fetchSubText(url, node) {
         const subTextUrl = combineURL(url, node.getAttribute("href"));
         try {
             const subTextHtml = await fetchHtml(subTextUrl);
-            const nodes = extractContentUsingXPath(subTextHtml, "//div[@class='zwzw']")
+            const textXpath = document.getElementById("text_xpath").value
+            const nodes = extractContentUsingXPath(subTextHtml, textXpath)
             let subText = "";
             nodes.forEach(node => subText += node.textContent);
             resolve(subText);
@@ -94,13 +95,16 @@ async function getActiveTabUrl() {
 
 async function fetchHtml(url) {
     try {
+        console.log("...fetching", url)
         const response = await fetch(url);
 
         if (!response.ok) {
+            console.log('Network response was not ok');
             throw new Error('Network response was not ok');
         }
 
         const content = await response.text(); // or response.json() if the content is in JSON format
+        console.log("...returned ", url)
         return content;
     } catch (error) {
         console.error('Error fetching content:', error);
