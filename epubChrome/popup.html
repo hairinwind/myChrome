@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EPUB Generator</title>
+    <script src="popup.js"></script>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 800px;
+            /* Adjust this value to your desired width */
+        }
+
+        /* Define a container for the table */
+        .table-container {
+            display: table;
+            width: 100%;
+            /* Adjust the width as needed */
+            border-collapse: collapse;
+            /* Optional, for cell spacing */
+        }
+
+        /* Style the table rows */
+        .table-row {
+            display: table-row;
+            border-bottom: 1px solid #ccc;
+            /* Optional, for row borders */
+        }
+
+        /* Style the table cells */
+        .table-cell {
+            display: table-cell;
+            padding: 10px;
+            /* Adjust padding as needed */
+            border: 1px solid #ccc;
+            /* Optional, for cell borders */
+        }
+
+        /* Apply alternating row colors (optional) */
+        .table-row:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table-container">
+        <div class="table-row">
+            <div class="table-cell"><label for="tableOfContent_xpath">tableOfContentXpath:</label></div>
+            <div class="table-cell"><input type="text" id="tableOfContent_xpath" name="tableOfContent_xpath"
+                    value="//div[@class='zwzw']//strong//a[@href]" /></div>
+        </div>
+        <div class="table-row">
+            <div class="table-cell"><label for="tableOfContent_keyword">tableOfContentKeyword:</label></div>
+            <div class="table-cell"><input type="text" id="tableOfContent_keyword" name="tableOfContent_keyword"
+                    value="妙境法师：瑜伽师地论" /></div>
+        </div>
+    </div>
+    <p>
+        <button id="generateEpub">Generate EPUB</button>
+    </p>
+
+    <div id="myModal" class="modal">
+        <p id="myMsg">Custom Modal Content.................................................................</p>
+    </div>
+</body>
+
+</html>
